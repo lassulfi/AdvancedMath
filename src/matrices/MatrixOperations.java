@@ -7,19 +7,31 @@
 package matrices;
 
 import exceptions.InvalidSizeExcpetion;
+import matrices.interfaces.IMatrixOperations;
+import numbers.NumberOperations;
 
 /**
  *
  * @author luis.assulfi
  */
-public class MatrixOperations{
+public class MatrixOperations implements IMatrixOperations{
     
-    public static Number[][] transpose(Number[][] matrix) throws NumberFormatException{
+    public MatrixOperations(){
+    }
+    
+    /**
+     * Transpose a matrix NxN or NxM
+     * @param matrix matrix NxN or NxM
+     * @return the transposed matrix
+     * @throws NumberFormatException 
+     */
+    @Override
+    public Number[][] transpose(Number[][] matrix) throws NumberFormatException{
         
         int lines = matrix.length;
         int columns = matrix[0].length;
         
-        Number[][] transposeMatrix = new Number[lines][columns];
+        Number[][] transposeMatrix = new Number[columns][lines];
         
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < lines; j++) {
@@ -30,7 +42,8 @@ public class MatrixOperations{
         return transposeMatrix;
     }
     
-    public static Number[] multiplyMatrixVector(Number[][] matrix, Number[] vector) 
+    @Override
+    public Number[] multiplyMatrixVector(Number[][] matrix, Number[] vector) 
             throws NumberFormatException, InvalidSizeExcpetion{
     
         int lines = matrix.length;
@@ -43,10 +56,10 @@ public class MatrixOperations{
         } else {
             for(int i = 0; i < columns; i++){
                 Number sum = 0;
+                Number aux = 0;
                 for(int j = 0; j < lines; j++){
-                    if((matrix[i][j] instanceof Integer) && (vector[i] instanceof Integer)){
-                        sum += matrix[i][j].intValue() * vector[i].intValue();
-                    }
+                    aux = NumberOperations.multiplication(matrix[i][j], vector[i]);
+                    sum = NumberOperations.summation(sum, aux);
                 }
                 result[i] = sum;
             }
@@ -55,4 +68,18 @@ public class MatrixOperations{
         return result;
     }
     
+    @Override
+    public Number[][] multiplyMatrices(Number[][] matrixA, Number[][] matrixB){
+    
+        int lines = matrixA.length;
+        int columns = matrixB[0].length;
+        
+        Number[][] result = new Number[lines][columns];
+        
+        for(int i = 0; i < lines; i++){
+            
+        }
+        
+        return null;
+    }
 }
