@@ -15,5 +15,5 @@ public interface IMatrixOperations {
     
     Number[][] transpose(Number[][] matrix) throws NumberFormatException;
     Number[] multiplyMatrixVector(Number[][] matrix, Number[] vector) throws NumberFormatException, InvalidSizeExcpetion;
-    Number[][] multiplyMatrices(Number[][] matrixA, Number[][] matrixB);
+    Number[][] multiplyMatrices(Number[][] matrixA, Number[][] matrixB) throws InvalidSizeExcpetion;
 }
